@@ -1,97 +1,56 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
-    <v-flex
-      xs12
-      sm8
-      md6
-    >
-      <div class="text-center">
-        <logo />
-        <vuetify-logo />
-      </div>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <section class="container">
+    <h1>{{ title }}</h1>
+    <p>{{ $store.state.message }}</p>
+    <hr>
+    <!-- <pre>[{{ now }}]</pre> -->
+    <!-- <router-link to="/other">Go to Other</router-link> -->
+    <div class="link"
+        @click.exact="$store.commit({type:'count', message:'add 1!', add:1})"
+        @click.shift.exact="$store.commit({type:'count', message:'add 5!', add:5})"
+        @click.ctrl.exact="$store.commit({type:'count', message:'add 10!', add:10})">
+      <a @click.stop="$store.commit('reset')">
+        clicked: {{ $store.state.counter }}
+      </a>
+    </div>
+  </section>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
 export default {
-  components: {
-    Logo,
-    VuetifyLogo
-  }
-}
+  data: function(){
+    return {
+      title: 'Hello',
+    };
+  },
+};
 </script>
+
+<style>
+a {
+  font-size: 16pt;
+}
+.link{
+  background-color: #def;
+  padding: 10px;
+}
+.container{
+  padding: 5px 10px;
+}
+h1 {
+  font-size: 60pt;
+  color: #345980;
+}
+p {
+  padding-top: 5px;
+  font-size: 20pt;
+}
+pre {
+  padding: 10px;
+  font-size: 18pt;
+  background-color: #345980;
+}
+hr {
+  margin: 10px 0px;
+}
+</style>
